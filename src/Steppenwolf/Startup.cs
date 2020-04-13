@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 using Steppenwolf.Data;
 
 namespace Steppenwolf
@@ -42,6 +43,8 @@ namespace Steppenwolf
                 app.UseExceptionHandler("/Error");
             }
 
+            app.UseSerilogRequestLogging();
+            
             app.UseStaticFiles();
 
             app.UseRouting();
