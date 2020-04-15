@@ -24,6 +24,10 @@ namespace Steppenwolf
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
+            services.AddWebOptimizer(pipeline =>
+            {
+                pipeline.AddScssBundle("/css/style.css", "/scss/style.scss");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,6 +41,8 @@ namespace Steppenwolf
             {
                 app.UseExceptionHandler("/Error");
             }
+            
+            app.UseWebOptimizer();
 
             app.UseSerilogRequestLogging();
 
