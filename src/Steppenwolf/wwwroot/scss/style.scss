@@ -1,6 +1,10 @@
-﻿@import "bootstrap/bootstrap";
+﻿@import "../lib/bootstrap/scss/bootstrap";
 
 @import "open-iconic/font/css/open-iconic-bootstrap.min.css";
+
+body {
+    background-color: #fff;
+}
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;

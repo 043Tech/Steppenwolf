@@ -363,3 +363,5 @@ healthchecksdb
 MigrationBackup/
 
 errorlogs.txt
+
+/src/Steppenwolf/wwwroot/lib/
