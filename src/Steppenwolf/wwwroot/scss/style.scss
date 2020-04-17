@@ -10,8 +10,10 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+$linkColor = #0366d6;
+
 a, .btn-link {
-    color: #0366d6;
+    color: $link-color;
 }
 
 .btn-primary {
@@ -28,17 +30,29 @@ app {
     margin: 0 auto;
     max-width: 1200px;
     
+    header {
+        padding-bottom: 1rem;
+        border-bottom: 1px solid rgba(1, 1, 1, 0.1);
+        
+        ul.nav {
+            :first-child {
+                padding-left: 0 !important;
+            }
+            
+            :last-child {
+                padding-right: 0 !important;
+            }
+        }
+    }
+    
     .main {
-        padding: 0 1rem;
-        padding-bottom: 2.5rem;
+        flex: 1 0 auto;
     }
 
     footer {
-        padding: 0 1rem;
-        height: 2.5rem;    
-        position: absolute;
-        bottom: 0;
-        width: 100%;
+        padding: 2rem 0 1rem;
+        border-top: 1px solid rgba(1, 1, 1, 0.1);
+        color: #737171;
     }
 }
 
@@ -76,9 +90,12 @@ app {
     background-color: rgba(0,0,0,0.4);
 }
 
-.sidebar .navbar-brand {
-    font-size: 1.1rem;
-}
+header{
+    .navbar-brand {
+        font-size: 2rem;
+        margin: 0.5rem 0px 0.8rem;
+    }  
+} 
 
 .sidebar .oi {
     width: 2rem;
