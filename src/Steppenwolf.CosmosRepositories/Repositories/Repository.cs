@@ -24,14 +24,16 @@ namespace Steppenwolf.CosmosRepositories.Repositories
         public async Task AddAsync(T entity)
         {
             await this.context.AddAsync(entity);
+            await this.SaveAsync();
         }
         
         public async Task AddRangeAsync(IEnumerable<T> entities)
         {
             await this.context.AddAsync(entities);
+            await this.SaveAsync();
         }
 
-        public async Task SaveAsync()
+        private async Task SaveAsync()
         {
             await this.context.SaveChangesAsync();
         }

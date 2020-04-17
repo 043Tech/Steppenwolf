@@ -12,7 +12,5 @@ namespace Steppenwolf.CosmosRepositories.Interfaces
         public Task AddAsync(T entity);
         
         public Task AddRangeAsync(IEnumerable<T> entity);
-
-        public Task SaveAsync();
     }
 }
