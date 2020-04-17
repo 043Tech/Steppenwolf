@@ -10,4 +10,9 @@
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Steppenwolf.CosmosRepositories\Steppenwolf.CosmosRepositories.csproj" />
+    <ProjectReference Include="..\Steppenwolf.Models\Steppenwolf.Models.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Steppenwolf.CosmosRepositor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Steppenwolf.Tests.Services", "tests/Steppenwolf.Tests.Services\Steppenwolf.Tests.Services.csproj", "{A7D1E968-D268-4B35-8521-92A6B8BDB663}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Steppenwolf.Models", "src\Steppenwolf.Models\Steppenwolf.Models.csproj", "{B69CBA2D-BD2A-4B99-B9EC-6649BDC431A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{A7D1E968-D268-4B35-8521-92A6B8BDB663}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7D1E968-D268-4B35-8521-92A6B8BDB663}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7D1E968-D268-4B35-8521-92A6B8BDB663}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B69CBA2D-BD2A-4B99-B9EC-6649BDC431A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B69CBA2D-BD2A-4B99-B9EC-6649BDC431A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B69CBA2D-BD2A-4B99-B9EC-6649BDC431A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B69CBA2D-BD2A-4B99-B9EC-6649BDC431A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +63,7 @@ Global
 		{63FD5EED-C931-4B4B-A94C-5D37BFFE8392} = {C1286C8E-0F1C-415D-832A-A73126FA439F}
 		{4F70C9EC-AA8C-4D1F-B247-59909324ED4C} = {D3487A57-5FBE-44A3-BB7E-CD3359825176}
 		{A7D1E968-D268-4B35-8521-92A6B8BDB663} = {F6BCD764-9F3B-40C7-975E-A884F3758892}
+		{B69CBA2D-BD2A-4B99-B9EC-6649BDC431A4} = {D3487A57-5FBE-44A3-BB7E-CD3359825176}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BFC4B5ED-801E-4ADA-9D01-2C87549C978B}

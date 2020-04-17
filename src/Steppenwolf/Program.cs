@@ -5,6 +5,7 @@ using Serilog;
 using Serilog.Debugging;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
+using Steppenwolf.Extensions;
 
 namespace Steppenwolf
 {
@@ -12,17 +13,18 @@ namespace Steppenwolf
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            CreateHostBuilder(args)
+                .Build()
+                .SeedData()
+                .Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
+        private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .UseSerilog((hostingContext, loggerConfiguration) =>
                 {
                     loggerConfiguration
-                        .MinimumLevel.Error()
-                        .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-                        .MinimumLevel.Override("Quartz", LogEventLevel.Warning)
+                        .MinimumLevel.Verbose()
                         .Enrich.FromLogContext()
                         .Enrich.WithProperty("Environment", hostingContext.HostingEnvironment)
                         .Enrich.WithProperty("HostName", Environment.MachineName)
@@ -31,7 +33,6 @@ namespace Steppenwolf
                     if (hostingContext.HostingEnvironment.IsDevelopment())
                     {
                         loggerConfiguration
-                            .MinimumLevel.Verbose()
                             .WriteTo.File("./errorlogs.txt", LogEventLevel.Error);
                     }
                     
