@@ -1,0 +1,11 @@
+addReviewers: true
+
+addAssignees: true
+
+reviewers: 
+  - vutov
+  - vidolch
+
+skipKeywords:
+
+numberOfReviewers: 1

@@ -1,6 +1,6 @@
 using System;
 
-namespace Steppenwolf.Data
+namespace Steppenwolf.Services.Models
 {
     public class WeatherForecast
     {
