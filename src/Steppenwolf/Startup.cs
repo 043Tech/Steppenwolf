@@ -33,7 +33,7 @@ namespace Steppenwolf
                 this.Configuration["Cosmos:AccountDatabase"]
                 ));
             services.AddServerSideBlazor();
-   
+            services.AddSingleton<CategoryService>();
             services.AddWebOptimizer(pipeline =>
             {
                 pipeline.AddScssBundle("/css/style.css", "/scss/style.scss");

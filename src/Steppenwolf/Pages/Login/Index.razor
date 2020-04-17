@@ -1,0 +1,25 @@
+﻿@page "/login"
+
+<h1>Login to your account</h1>
+
+<div class="container m-0 p-0">
+    <form class="col-md-4 p-0 form-signin @(_loggedIn ? "d-none" : "") " _lpchecked="1">
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" >
+        
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password">
+        
+        <button class="btn btn-lg btn-primary btn-block" type="button" @onclick="Login">Sign in</button>
+    </form>
+</div>
+
+<p class="@(!_loggedIn ? "d-none" : "")">You expected this to work?</p>
+
+@code {
+    private bool _loggedIn = false;
+    private void Login()
+    {
+        _loggedIn = true;
+    }
+}
