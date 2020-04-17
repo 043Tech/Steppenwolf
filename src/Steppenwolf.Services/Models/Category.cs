@@ -1,4 +1,4 @@
-﻿namespace Steppenwolf.Data
+﻿namespace Steppenwolf.Services.Data
 {
     public class Category
     {

@@ -10,7 +10,7 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-$linkColor = #0366d6;
+$link-color: #0366d6;
 
 a, .btn-link {
     color: $link-color;
@@ -29,6 +29,7 @@ app {
     min-height: 100vh;
     margin: 0 auto;
     max-width: 1200px;
+    padding: 0 1rem;
     
     header {
         padding-bottom: 1rem;

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Steppenwolf.Data
+namespace Steppenwolf.Services.Data
 {
     public class CategoryService
     {
