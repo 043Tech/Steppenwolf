@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,13 +33,16 @@ namespace Steppenwolf
                 this.Configuration["Cosmos:AccountKey"],
                 this.Configuration["Cosmos:AccountDatabase"]
                 ));
-            services.AddServerSideBlazor();
-            services.AddSingleton<CategoryService>();
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddEntityFrameworkStores<CosmosDbContext>();
+            
+            services.AddServerSideBlazor(); // TODO change to client-side
             services.AddWebOptimizer(pipeline =>
             {
-                pipeline.AddScssBundle("/css/style.css", "/scss/style.scss");
+                pipeline.AddScssBundle("/css/style.css", "/scss/style.scss").UseContentRoot();
             });
             
+            services.AddSingleton<CategoryService>();
             services.AddTransient<WeatherForecastService>();
             services.AddTransient<IRepository<Test>, Repository<Test>>();
         }
@@ -62,6 +66,9 @@ namespace Steppenwolf
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Steppenwolf.Services.Models;
 
 namespace Steppenwolf.Services.Data
 {

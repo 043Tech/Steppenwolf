@@ -1,5 +1,12 @@
 ﻿@page "/about"
 
-<h1>About</h1>
-
-<p>Some garage build blog.</p>
+<AuthorizeView>
+    <Authorized>
+        <h1>Hello, !</h1>
+        <p>You can only see this content if you're authenticated.</p>
+    </Authorized>
+    <NotAuthorized>
+        <h1>Authentication Failure!</h1>
+        <p>You're not signed in.</p>
+    </NotAuthorized>
+</AuthorizeView>
