@@ -39,7 +39,7 @@ namespace Steppenwolf
             services.AddServerSideBlazor(); // TODO change to client-side
             services.AddWebOptimizer(pipeline =>
             {
-                pipeline.AddScssBundle("/css/style.css", "/scss/style.scss").UseContentRoot();
+                pipeline.CompileScssFiles("/scss/style.scss");
             });
             
             services.AddSingleton<CategoryService>();
