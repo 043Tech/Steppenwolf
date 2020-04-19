@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Steppenwolf.CosmosRepositories.Context;
@@ -12,8 +13,10 @@ namespace Steppenwolf.Extensions
         {
             using (var serviceScope = host.Services.CreateScope())
             {
-                // TODO Move to repo when needed. This is for tests
-                var context = serviceScope.ServiceProvider.GetService<CosmosDbContext>();
+                var serviceProvider = serviceScope.ServiceProvider;    
+                
+                // TODO Clean up
+                var context = serviceProvider.GetService<CosmosDbContext>();
                 if (!context.Tests.ToList().Any())
                 {
                     context.Tests.AddRange(new[]
@@ -31,6 +34,18 @@ namespace Steppenwolf.Extensions
                     });
 
                     context.SaveChanges();
+                }
+
+                var env = serviceProvider.GetService<IHostEnvironment>();
+                if (env.IsDevelopment())
+                {
+                    var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
+                    const string admin = "Admin123@localhost";
+                    if (userManager.FindByNameAsync(admin).Result == null)
+                    {
+                        var user = new ApplicationUser { UserName = admin, Email = admin };
+                        var result = userManager.CreateAsync(user, admin).Result;
+                    }
                 }
             }
 
