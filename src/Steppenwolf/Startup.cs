@@ -32,16 +32,29 @@ namespace Steppenwolf
                 this.Configuration["Cosmos:AccountEndpoint"],
                 this.Configuration["Cosmos:AccountKey"],
                 this.Configuration["Cosmos:AccountDatabase"]
-                ));
-            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            ));
+            services.AddAuthentication(o =>
+                {
+                    o.DefaultScheme = IdentityConstants.ApplicationScheme;
+                    o.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+                })
+                .AddFacebook(o =>
+                {
+                }) // TODO Extract to settings
+                .AddIdentityCookies();
+
+            services.AddIdentityCore<ApplicationUser>(o =>
+                {
+                    o.Stores.MaxLengthForKeys = 128;
+                    o.SignIn.RequireConfirmedAccount = false;
+                })
+                .AddDefaultUI()
+                .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<CosmosDbContext>();
-            
+
             services.AddServerSideBlazor(); // TODO change to client-side
-            services.AddWebOptimizer(pipeline =>
-            {
-                pipeline.CompileScssFiles("/scss/style.scss");
-            });
-            
+            services.AddWebOptimizer(pipeline => { pipeline.CompileScssFiles("/scss/style.scss"); });
+
             services.AddSingleton<CategoryService>();
             services.AddTransient<WeatherForecastService>();
             services.AddTransient<IRepository<Test>, Repository<Test>>();
@@ -58,7 +71,7 @@ namespace Steppenwolf
             {
                 app.UseExceptionHandler("/Error");
             }
-            
+
             app.UseWebOptimizer();
 
             app.UseSerilogRequestLogging();
