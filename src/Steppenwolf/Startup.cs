@@ -6,10 +6,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
-using Steppenwolf.CosmosRepositories.Context;
-using Steppenwolf.CosmosRepositories.Interfaces;
-using Steppenwolf.CosmosRepositories.Repositories;
 using Steppenwolf.Models;
+using Steppenwolf.PostgresRepositories.Context;
+using Steppenwolf.PostgresRepositories.Interfaces;
+using Steppenwolf.PostgresRepositories.Repositories;
 using Steppenwolf.Services.Data;
 
 namespace Steppenwolf
@@ -28,19 +28,17 @@ namespace Steppenwolf
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddDbContext<CosmosDbContext>(options => options.UseCosmos(
-                this.Configuration["Cosmos:AccountEndpoint"],
-                this.Configuration["Cosmos:AccountKey"],
-                this.Configuration["Cosmos:AccountDatabase"]
+            services.AddDbContext<PostgresDbContext>(options => options.UseNpgsql(
+                this.Configuration.GetConnectionString("PostgreSQL")
             ));
             services.AddAuthentication(o =>
                 {
                     o.DefaultScheme = IdentityConstants.ApplicationScheme;
                     o.DefaultSignInScheme = IdentityConstants.ExternalScheme;
                 })
-                .AddFacebook(o =>
-                {
-                }) // TODO Extract to settings
+                //// .AddFacebook(o =>
+                //// {
+                //// }) // TODO Extract to settings
                 .AddIdentityCookies();
 
             services.AddIdentityCore<ApplicationUser>(o =>
@@ -50,7 +48,7 @@ namespace Steppenwolf
                 })
                 .AddDefaultUI()
                 .AddDefaultTokenProviders()
-                .AddEntityFrameworkStores<CosmosDbContext>();
+                .AddEntityFrameworkStores<PostgresDbContext>();
 
             services.AddServerSideBlazor(); // TODO change to client-side
             services.AddWebOptimizer(pipeline => { pipeline.CompileScssFiles("/scss/style.scss"); });

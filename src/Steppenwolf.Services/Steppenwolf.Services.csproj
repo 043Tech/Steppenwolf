@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Steppenwolf.CosmosRepositories\Steppenwolf.CosmosRepositories.csproj" />
     <ProjectReference Include="..\Steppenwolf.Models\Steppenwolf.Models.csproj" />
+    <ProjectReference Include="..\Steppenwolf.PostgresRepositories\Steppenwolf.PostgresRepositories.csproj" />
   </ItemGroup>
 
 </Project>
