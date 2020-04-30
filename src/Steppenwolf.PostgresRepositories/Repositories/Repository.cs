@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Steppenwolf.CosmosRepositories.Context;
-using Steppenwolf.CosmosRepositories.Interfaces;
 using Steppenwolf.Models;
+using Steppenwolf.PostgresRepositories.Context;
+using Steppenwolf.PostgresRepositories.Interfaces;
 
-namespace Steppenwolf.CosmosRepositories.Repositories
+namespace Steppenwolf.PostgresRepositories.Repositories
 {
     public class Repository<T> : IRepository<T> where T : Entity
     {
-        private readonly CosmosDbContext context;
+        private readonly PostgresDbContext context;
 
-        public Repository(CosmosDbContext context)
+        public Repository(PostgresDbContext context)
         {
             this.context = context;
         }

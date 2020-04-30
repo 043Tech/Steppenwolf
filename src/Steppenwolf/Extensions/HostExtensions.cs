@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Steppenwolf.CosmosRepositories.Context;
 using Steppenwolf.Models;
+using Steppenwolf.PostgresRepositories.Context;
 
 namespace Steppenwolf.Extensions
 {
@@ -16,7 +16,7 @@ namespace Steppenwolf.Extensions
                 var serviceProvider = serviceScope.ServiceProvider;    
                 
                 // TODO Clean up
-                var context = serviceProvider.GetService<CosmosDbContext>();
+                var context = serviceProvider.GetService<PostgresDbContext>();
                 if (!context.Tests.ToList().Any())
                 {
                     context.Tests.AddRange(new[]

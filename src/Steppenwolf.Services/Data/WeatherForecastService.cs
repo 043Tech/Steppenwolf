@@ -2,8 +2,8 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Steppenwolf.CosmosRepositories.Interfaces;
 using Steppenwolf.Models;
+using Steppenwolf.PostgresRepositories.Interfaces;
 using Steppenwolf.Services.Models;
 
 namespace Steppenwolf.Services.Data

@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Steppenwolf.Contracts", "sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Steppenwolf.Services", "src\Steppenwolf.Services\Steppenwolf.Services.csproj", "{63FD5EED-C931-4B4B-A94C-5D37BFFE8392}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Steppenwolf.CosmosRepositories", "src\Steppenwolf.CosmosRepositories\Steppenwolf.CosmosRepositories.csproj", "{4F70C9EC-AA8C-4D1F-B247-59909324ED4C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Steppenwolf.PostgresRepositories", "src\Steppenwolf.PostgresRepositories\Steppenwolf.PostgresRepositories.csproj", "{4F70C9EC-AA8C-4D1F-B247-59909324ED4C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Steppenwolf.Tests.Services", "tests/Steppenwolf.Tests.Services\Steppenwolf.Tests.Services.csproj", "{A7D1E968-D268-4B35-8521-92A6B8BDB663}"
 EndProject

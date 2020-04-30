@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Steppenwolf.Models;
 
-namespace Steppenwolf.CosmosRepositories.Interfaces
+namespace Steppenwolf.PostgresRepositories.Interfaces
 {
     public interface IRepository<T> where T : Entity
     {

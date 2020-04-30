@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
 using Steppenwolf.Models;
 
-namespace Steppenwolf.CosmosRepositories.Context
+namespace Steppenwolf.PostgresRepositories.Context
 {
-    public class CosmosDbContext : IdentityDbContext<ApplicationUser>
+    public class PostgresDbContext : IdentityDbContext<ApplicationUser>
     {
-        public CosmosDbContext(DbContextOptions options)
+        public PostgresDbContext(DbContextOptions options)
             : base(options)
         {
         }
@@ -16,7 +16,6 @@ namespace Steppenwolf.CosmosRepositories.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasDefaultContainer("Data");
             modelBuilder.Entity<Test>().Property(p => p.Id).HasValueGenerator<GuidValueGenerator>();
             
             base.OnModelCreating(modelBuilder);
