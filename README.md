@@ -16,7 +16,7 @@ Visual Studio 19+, Visual Studio Code or Rider 19+
 Postgres 11+
 
 ## Docker
-There is a docker-compose with postgres and pgadmin [ready for dev](https://github.com/043Tech/Steppenwolf/Steppenwolf/docker/dev)
+There is a docker-compose with postgres and pgadmin [ready for dev](https://github.com/043Tech/Steppenwolf/tree/master/docker/dev)
 
 ## Overall architecture
 ![Architecture](https://svutov.com/apps/files_sharing/publicpreview/yn4pdwmmDsZNo37?x=1920&y=594&a=true&file=photo_2020-04-30_20-53-42.jpg&scalingup=0 "Architecture")
