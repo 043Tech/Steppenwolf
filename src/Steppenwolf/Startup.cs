@@ -51,7 +51,19 @@ namespace Steppenwolf
                 .AddEntityFrameworkStores<PostgresDbContext>();
 
             services.AddServerSideBlazor(); // TODO change to client-side
-            services.AddWebOptimizer(pipeline => { pipeline.CompileScssFiles("/scss/style.scss"); });
+            services.AddWebOptimizer(pipeline =>
+            {
+                pipeline.AddBundle(
+                        "/css/style.css", 
+                        "text/css; charset=UTF-8", 
+                        "/wwwroot/scss/style.scss")
+                    .UseContentRoot()
+                    .CompileScss()
+                    .Concatenate()
+                    .FingerprintUrls()
+                    .AddResponseHeader("X-Content-Type-Options", "nosniff")
+                    .MinifyCss();
+            });
 
             services.AddSingleton<CategoryService>();
             services.AddTransient<WeatherForecastService>();
@@ -70,8 +82,6 @@ namespace Steppenwolf
                 app.UseExceptionHandler("/Error");
             }
 
-            app.UseWebOptimizer();
-
             app.UseSerilogRequestLogging();
 
             app.UseStaticFiles();
@@ -80,6 +90,8 @@ namespace Steppenwolf
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseWebOptimizer();
 
             app.UseEndpoints(endpoints =>
             {
