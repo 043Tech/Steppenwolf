@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using Steppenwolf.Config;
+using Steppenwolf.Extensions;
 using Steppenwolf.Models;
 using Steppenwolf.PostgresRepositories.Context;
 using Steppenwolf.PostgresRepositories.Interfaces;
@@ -31,14 +33,14 @@ namespace Steppenwolf
             services.AddDbContext<PostgresDbContext>(options => options.UseNpgsql(
                 this.Configuration.GetConnectionString("PostgreSQL")
             ));
+            var identityConfig = new IdentityProviders();
+            this.Configuration.GetSection(nameof(IdentityProviders)).Bind(identityConfig);
             services.AddAuthentication(o =>
                 {
                     o.DefaultScheme = IdentityConstants.ApplicationScheme;
                     o.DefaultSignInScheme = IdentityConstants.ExternalScheme;
                 })
-                //// .AddFacebook(o =>
-                //// {
-                //// }) // TODO Extract to settings
+                .AddIdentityProviders(identityConfig)
                 .AddIdentityCookies();
 
             services.AddIdentityCore<ApplicationUser>(o =>
