@@ -27,4 +27,67 @@
   <ItemGroup>
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\css\bootstrap-grid.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\css\bootstrap-grid.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\css\bootstrap-grid.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\css\bootstrap-grid.min.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\css\bootstrap-reboot.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\css\bootstrap-reboot.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\css\bootstrap-reboot.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\css\bootstrap.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\css\bootstrap.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\css\bootstrap.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\css\bootstrap.min.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\bootstrap.bundle.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\bootstrap.bundle.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\bootstrap.bundle.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\bootstrap.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\bootstrap.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\bootstrap.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\bootstrap.min.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\dist\alert.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\dist\alert.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\dist\button.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\dist\button.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\dist\carousel.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\dist\carousel.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\dist\collapse.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\dist\collapse.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\dist\dropdown.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\dist\dropdown.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\dist\index.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\dist\index.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\dist\modal.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\dist\modal.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\dist\popover.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\dist\popover.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\dist\scrollspy.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\dist\scrollspy.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\dist\tab.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\dist\tab.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\dist\toast.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\dist\toast.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\dist\tooltip.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\dist\tooltip.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\dist\util.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\dist\util.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\src\alert.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\src\button.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\src\carousel.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\src\collapse.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\src\dropdown.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\src\index.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\src\modal.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\src\popover.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\src\scrollspy.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\src\tab.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\src\toast.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\src\tools\sanitizer.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\src\tooltip.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\js\src\util.js" />
+  </ItemGroup>
+
 </Project>
