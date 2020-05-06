@@ -10,8 +10,8 @@ using Steppenwolf.PostgresRepositories.Context;
 namespace Steppenwolf.PostgresRepositories.Migrations
 {
     [DbContext(typeof(PostgresDbContext))]
-    [Migration("20200428194526_initial")]
-    partial class initial
+    [Migration("20200506131903_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -215,18 +215,35 @@ namespace Steppenwolf.PostgresRepositories.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Steppenwolf.Models.Test", b =>
+            modelBuilder.Entity("Steppenwolf.Models.BlogPostEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Type")
+                    b.Property<string>("AuthorId")
                         .HasColumnType("text");
+
+                    b.Property<string>("Body")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tests");
+                    b.HasIndex("AuthorId");
+
+                    b.ToTable("Blogs");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -278,6 +295,13 @@ namespace Steppenwolf.PostgresRepositories.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Steppenwolf.Models.BlogPostEntity", b =>
+                {
+                    b.HasOne("Steppenwolf.Models.ApplicationUser", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -12,6 +13,7 @@ using Steppenwolf.Models;
 using Steppenwolf.PostgresRepositories.Context;
 using Steppenwolf.PostgresRepositories.Interfaces;
 using Steppenwolf.PostgresRepositories.Repositories;
+using Steppenwolf.Services;
 using Steppenwolf.Services.Data;
 
 namespace Steppenwolf
@@ -29,6 +31,7 @@ namespace Steppenwolf
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(Startup));
             services.AddRazorPages();
             services.AddDbContext<PostgresDbContext>(options => options.UseNpgsql(
                 this.Configuration.GetConnectionString("PostgreSQL")
@@ -67,9 +70,12 @@ namespace Steppenwolf
                     .MinifyCss();
             });
 
-            services.AddSingleton<CategoryService>();
-            services.AddTransient<WeatherForecastService>();
-            services.AddTransient<IRepository<Test>, Repository<Test>>();
+            services.AddTransient<BlogPostService>();
+            
+            // TODO Move to Api project
+            services.AddSingleton<CategoryController>();
+            services.AddTransient<BlogPostController>();
+            services.AddTransient<IRepository<BlogPostEntity>, Repository<BlogPostEntity>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

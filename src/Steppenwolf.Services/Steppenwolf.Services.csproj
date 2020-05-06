@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Steppenwolf.Contracts\Steppenwolf.Contracts.csproj" />
     <ProjectReference Include="..\Steppenwolf.Models\Steppenwolf.Models.csproj" />
     <ProjectReference Include="..\Steppenwolf.PostgresRepositories\Steppenwolf.PostgresRepositories.csproj" />
   </ItemGroup>

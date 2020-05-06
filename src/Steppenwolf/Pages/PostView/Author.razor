@@ -1,0 +1,11 @@
+<div class="d-flex flex-row justify-content-start m-3">
+    <span>@DateCreated.ToString("MMM dd, yyyy") by @AuthorName</span>
+</div>
+
+@code{
+    [Parameter]
+    public DateTime DateCreated { get; set; }
+    
+    [Parameter]
+    public string AuthorName { get; set; }
+}

@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Steppenwolf.Models;
@@ -11,41 +10,30 @@ namespace Steppenwolf.Extensions
     {
         public static IHost SeedData(this IHost host)
         {
-            using (var serviceScope = host.Services.CreateScope())
+            using var serviceScope = host.Services.CreateScope();
+            var serviceProvider = serviceScope.ServiceProvider;
+            var context = serviceProvider.GetService<PostgresDbContext>();
+
+            var env = serviceProvider.GetService<IHostEnvironment>();
+            if (env.IsDevelopment())
             {
-                var serviceProvider = serviceScope.ServiceProvider;    
-                
-                // TODO Clean up
-                var context = serviceProvider.GetService<PostgresDbContext>();
-                if (!context.Tests.ToList().Any())
+                var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
+                const string admin = "Admin123@localhost";
+                if (userManager.FindByNameAsync(admin).Result == null)
                 {
-                    context.Tests.AddRange(new[]
+                    var user = new ApplicationUser { UserName = admin, Email = admin };
+                    var result = userManager.CreateAsync(user, admin).Result;
+
+                    // TODO Clean up
+                    var body = string.Empty;
+                    for (int i = 0; i < 300; i++)
                     {
-                        new Test() { Type = "Freezing" },
-                        new Test() { Type = "Bracing" },
-                        new Test() { Type = "Chilly" },
-                        new Test() { Type = "Cool" },
-                        new Test() { Type = "Mild" },
-                        new Test() { Type = "Warm" },
-                        new Test() { Type = "Balmy" },
-                        new Test() { Type = "Hot" },
-                        new Test() { Type = "Sweltering" },
-                        new Test() { Type = "Scorching" },
-                    });
+                        body += "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in lobortis eros. Nam gravida purus et interdum ullamcorper. ";
+                    }
+
+                    context.Blogs.AddAsync(new BlogPostEntity() { Title = "Freezing", AuthorId = user.Id, Body = body });
 
                     context.SaveChanges();
-                }
-
-                var env = serviceProvider.GetService<IHostEnvironment>();
-                if (env.IsDevelopment())
-                {
-                    var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
-                    const string admin = "Admin123@localhost";
-                    if (userManager.FindByNameAsync(admin).Result == null)
-                    {
-                        var user = new ApplicationUser { UserName = admin, Email = admin };
-                        var result = userManager.CreateAsync(user, admin).Result;
-                    }
                 }
             }
 

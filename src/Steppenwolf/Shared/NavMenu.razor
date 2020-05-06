@@ -1,6 +1,6 @@
 ﻿@using Steppenwolf.Services.Data
 @using Steppenwolf.Services.Models
-@inject CategoryService CategoryService
+@inject CategoryController CategoryController
 <nav class="nav-scroller py-1 mb-2">
     <ul class="nav d-flex justify-content-between">
         @foreach (var category in categories)
@@ -20,7 +20,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        this.categories = CategoryService.GetCategories();
+        this.categories = CategoryController.GetCategories();
 
         await Task.CompletedTask;
     }
