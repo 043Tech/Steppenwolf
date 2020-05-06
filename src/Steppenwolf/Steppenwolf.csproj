@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="LigerShark.WebOptimizer.Core" Version="3.0.250" />
     <PackageReference Include="LigerShark.WebOptimizer.Sass" Version="3.0.40-beta" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="3.1.3" />
@@ -25,6 +26,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Pages\Blog\Post.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Pages\PostView\Author.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
   </ItemGroup>
 
 </Project>

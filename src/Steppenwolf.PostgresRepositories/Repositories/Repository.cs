@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Steppenwolf.Models;
 using Steppenwolf.PostgresRepositories.Context;
 using Steppenwolf.PostgresRepositories.Interfaces;
@@ -16,9 +18,17 @@ namespace Steppenwolf.PostgresRepositories.Repositories
             this.context = context;
         }
 
+        public async Task<T> GetByIdAsync(Guid id)
+        {
+            return await this.context.Set<T>()
+                .Where(e => e.IsDeleted == false)
+                .Where(e => e.Id == id)
+                .FirstOrDefaultAsync();
+        }
+        
         public IQueryable<T> Query()
         {
-            return this.context.Set<T>();
+            return this.context.Set<T>().Where(e => e.IsDeleted == false);
         }
 
         public async Task AddAsync(T entity)
@@ -30,6 +40,18 @@ namespace Steppenwolf.PostgresRepositories.Repositories
         public async Task AddRangeAsync(IEnumerable<T> entities)
         {
             await this.context.AddAsync(entities);
+            await this.SaveAsync();
+        }
+
+        public async Task UpdateAsync(T entity)
+        {
+            this.context.Update(entity);
+            await this.SaveAsync();
+        }
+
+        public async Task DeleteAsync(T entity)
+        {
+            this.context.Remove(entity);
             await this.SaveAsync();
         }
 

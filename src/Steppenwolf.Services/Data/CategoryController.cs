@@ -3,7 +3,7 @@ using Steppenwolf.Services.Models;
 
 namespace Steppenwolf.Services.Data
 {
-    public class CategoryService
+    public class CategoryController
     {
         private readonly IEnumerable<Category> categories = new List<Category>
         {

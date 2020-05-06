@@ -1,0 +1,10 @@
+@page "/post/{id:guid}"
+@inherits PostBase
+
+<div class="container mb-3">
+    <h1>@this.BlogPost.Title</h1>
+    <Author DateCreated="@this.BlogPost.Created" AuthorName="@this.BlogPost.Author.Name"/>    
+    <div class="text-justify indent">
+        @this.BlogPost.Body
+    </div>
+</div>
