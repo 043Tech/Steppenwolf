@@ -31,10 +31,12 @@ namespace Steppenwolf.PostgresRepositories.Repositories
             return this.context.Set<T>().Where(e => e.IsDeleted == false);
         }
 
-        public async Task AddAsync(T entity)
+        public async Task<Guid> AddAsync(T entity)
         {
             await this.context.AddAsync(entity);
             await this.SaveAsync();
+
+            return entity.Id;
         }
         
         public async Task AddRangeAsync(IEnumerable<T> entities)

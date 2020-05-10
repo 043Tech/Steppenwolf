@@ -19,5 +19,10 @@ namespace Steppenwolf.Services
         {
             return await this.controller.GetById(id);
         }
+
+        public async Task<Guid> Create(BlogPost blogPost, string authorId)
+        {
+            return await this.controller.Create(blogPost, authorId);
+        }
     }
 }

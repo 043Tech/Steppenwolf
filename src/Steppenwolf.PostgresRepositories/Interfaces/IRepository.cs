@@ -12,7 +12,7 @@ namespace Steppenwolf.PostgresRepositories.Interfaces
         
         public IQueryable<T> Query();
         
-        public Task AddAsync(T entity);
+        public Task<Guid> AddAsync(T entity);
         
         public Task AddRangeAsync(IEnumerable<T> entity);
 
