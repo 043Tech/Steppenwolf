@@ -19,6 +19,8 @@ namespace Steppenwolf.AutoMapper
                     dest => dest.Name,
                     opt => opt.MapFrom(src => src.UserName)
                 );
+
+            this.CreateMap<BlogPost, BlogPostEntity>();
         }
     }
 }

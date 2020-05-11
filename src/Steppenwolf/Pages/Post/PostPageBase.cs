@@ -3,17 +3,17 @@ using Microsoft.AspNetCore.Components;
 using Steppenwolf.Contracts;
 using Steppenwolf.Services;
 
-namespace Steppenwolf.Pages.PostView
+namespace Steppenwolf.Pages.Post
 {
-    public class PostBase : ComponentBase
+    public class PostPageBase : ComponentBase
     {
-        [Inject]
-        public BlogPostService BlogPostService { get; set; }
-
         [Parameter]
         public Guid Id { get; set; }
 
         protected BlogPost BlogPost { get; set; } = new BlogPost() { Author = new Contracts.Author() };
+        
+        [Inject]
+        private BlogPostService BlogPostService { get; set; }
 
         protected override async void OnInitialized()
         {

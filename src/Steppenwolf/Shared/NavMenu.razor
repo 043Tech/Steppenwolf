@@ -3,6 +3,11 @@
 @inject CategoryController CategoryController
 <nav class="nav-scroller py-1 mb-2">
     <ul class="nav d-flex justify-content-between">
+        <li class="nav-item">
+            <NavLink class="nav-link" href="/">
+                Home
+            </NavLink>
+        </li>
         @foreach (var category in categories)
         {
             <li class="nav-item">
