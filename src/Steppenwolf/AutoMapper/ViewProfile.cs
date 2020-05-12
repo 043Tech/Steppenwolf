@@ -8,7 +8,8 @@ namespace Steppenwolf.AutoMapper
     {
         public ViewProfile()
         {
-            this.CreateMap<BlogPostCreateModel, BlogPost>();
+            this.CreateMap<BlogPostModel, BlogPost>();
+            this.CreateMap<BlogPost, BlogPostModel>();
         }
     }
 }

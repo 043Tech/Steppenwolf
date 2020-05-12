@@ -21,9 +21,9 @@ namespace Steppenwolf.Services
             return await this.controller.GetById(id);
         }
 
-        public async Task<Guid> Create(BlogPost blogPost, string authorId)
+        public async Task<Guid> Upsert(BlogPost blogPost, string userId)
         {
-            return await this.controller.Create(blogPost, authorId);
+            return await this.controller.Upsert(blogPost, userId);
         }
 
         public async Task<IEnumerable<BlogPost>> GetAll(int pageSize, int pageIndex)

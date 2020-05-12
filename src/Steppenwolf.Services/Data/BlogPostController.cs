@@ -23,15 +23,23 @@ namespace Steppenwolf.Services.Data
 
         public Task<BlogPost> GetById(Guid id)
         {
-            var blog = this.repository.Query().Include(r => r.Author).FirstOrDefault(b => b.Id == id);
+            var blog = this.repository.Query()
+                .Include(r => r.Author)
+                .FirstOrDefault(b => b.Id == id);
             return Task.FromResult(this.mapper.Map<BlogPost>(blog));
         }
-
-        public async Task<Guid> Create(BlogPost blogPost, string authorId)
+        
+        // Todo take user id from bearer when migrated to web assembly
+        public async Task<Guid> Upsert(BlogPost blogPost, string userId)
         {
             var blog = this.mapper.Map<BlogPostEntity>(blogPost);
-            blog.AuthorId = authorId;
-
+            var exist = blog.Id != default && this.repository.Query().Any(b => b.Id == blog.Id);
+            if (exist)
+            {
+                return await this.repository.UpdateAsync(blog);
+            }
+            
+            blog.AuthorId = userId;
             return await this.repository.AddAsync(blog);
         }
 

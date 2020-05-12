@@ -10,13 +10,13 @@ namespace Steppenwolf.PostgresRepositories.Interfaces
     {
         public Task<T> GetByIdAsync(Guid id);
         
-        public IQueryable<T> Query();
+        public IQueryable<T> Query(bool tracking = false);
         
         public Task<Guid> AddAsync(T entity);
         
         public Task AddRangeAsync(IEnumerable<T> entity);
 
-        public Task UpdateAsync(T entity);
+        public Task<Guid> UpdateAsync(T entity);
 
         public Task DeleteAsync(T entity);
     }

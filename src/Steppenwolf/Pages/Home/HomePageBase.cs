@@ -28,7 +28,7 @@ namespace Steppenwolf.Pages.Home
         private BlogPostService BlogPostService { get; set; }
         
         [Inject]
-        private IJSRuntime JsRuntime { get; set; }
+        private BlazorHelper BlazorHelper { get; set; }
 
         protected override async void OnInitialized()
         {
@@ -61,14 +61,14 @@ namespace Steppenwolf.Pages.Home
         {
             this.PageIndex--;
             await this.Load();
-            await this.JsRuntime.InvokeVoidAsync("blazorHelpers.scrollToFragment", "posts");
+            await this.BlazorHelper.ScrollToFragment("posts");
         }
 
         protected async Task Next()
         {
             this.PageIndex++;
             await this.Load();
-            await this.JsRuntime.InvokeVoidAsync("blazorHelpers.scrollToFragment", "posts");
+            await this.BlazorHelper.ScrollToFragment("posts");
         }
     }
 }

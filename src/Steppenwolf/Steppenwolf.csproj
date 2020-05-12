@@ -25,30 +25,4 @@
     <ProjectReference Include="..\Steppenwolf.Services\Steppenwolf.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Update="Pages\Blog\Post.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
-    <Content Update="Pages\PostView\Author.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
-    <Content Update="Pages\PostView\PostView.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
-    <Content Update="Pages\PostView\PostViewBase.cs">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
-    <Content Update="Pages\Home\HomePage.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
-    <Content Update="wwwroot\blazor-utils.js">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Shared\BS4Inputs\BS4InputText.razor" />
-  </ItemGroup>
-
 </Project>

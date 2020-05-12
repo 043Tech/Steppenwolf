@@ -1,4 +1,4 @@
-<div class="d-flex flex-row justify-content-start m-3">
+<div class="d-flex flex-row justify-content-start m-3 @this.Class">
     <span>@DateCreated.ToString("MMM dd, yyyy") by @AuthorName</span>
 </div>
 
@@ -8,4 +8,7 @@
     
     [Parameter]
     public string AuthorName { get; set; }
+
+    [Parameter]
+    public string Class { get; set; }
 }
