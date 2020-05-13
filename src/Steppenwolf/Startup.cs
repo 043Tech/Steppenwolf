@@ -70,6 +70,7 @@ namespace Steppenwolf
                     .MinifyCss();
             });
 
+            services.AddTransient<BlazorHelper>();
             services.AddTransient<BlogPostService>();
             
             // TODO Move to Api project

@@ -20,7 +20,15 @@ namespace Steppenwolf.AutoMapper
                     opt => opt.MapFrom(src => src.UserName)
                 );
 
-            this.CreateMap<BlogPost, BlogPostEntity>();
+            this.CreateMap<BlogPost, BlogPostEntity>()
+                .ForMember(
+                    dest => dest.AuthorId,
+                    opt => opt.MapFrom(src => src.Author.Id)
+                )
+                .ForMember(
+                    dest => dest.Author,
+                    opt => opt.Ignore()
+                );
         }
     }
 }

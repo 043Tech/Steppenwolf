@@ -26,9 +26,15 @@ namespace Steppenwolf.PostgresRepositories.Repositories
                 .FirstOrDefaultAsync();
         }
         
-        public IQueryable<T> Query()
+        public IQueryable<T> Query(bool tracking = false)
         {
-            return this.context.Set<T>().Where(e => e.IsDeleted == false);
+            var query = this.context.Set<T>().Where(e => e.IsDeleted == false);
+            if (tracking)
+            {
+                return query;
+            }
+
+            return query.AsNoTracking();
         }
 
         public async Task<Guid> AddAsync(T entity)
@@ -45,10 +51,12 @@ namespace Steppenwolf.PostgresRepositories.Repositories
             await this.SaveAsync();
         }
 
-        public async Task UpdateAsync(T entity)
+        public async Task<Guid> UpdateAsync(T entity)
         {
             this.context.Update(entity);
             await this.SaveAsync();
+
+            return entity.Id;
         }
 
         public async Task DeleteAsync(T entity)

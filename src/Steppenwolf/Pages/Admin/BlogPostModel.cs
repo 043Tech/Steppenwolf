@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Steppenwolf.Pages.Admin
 {
-    public class BlogPostCreateModel
+    public class BlogPostModel
     {
         [Required]
         [StringLength(500, MinimumLength = 10)]

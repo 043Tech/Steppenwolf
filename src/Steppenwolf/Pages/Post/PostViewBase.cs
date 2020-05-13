@@ -7,5 +7,8 @@ namespace Steppenwolf.Pages.Post
     {
         [Parameter]
         public BlogPost BlogPost { get; set; }
+
+        [Parameter]
+        public bool ExcludeEdit { get; set; }
     }
 }

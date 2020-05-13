@@ -1,30 +1,31 @@
 @page "/admin/post/create"
+@page "/admin/post/edit/{id:guid}"
 @* ReSharper disable RedundantUsingDirective *@
 @using Steppenwolf.Pages.Post
 @* ReSharper restore RedundantUsingDirective *@
-@inherits CreatePostBase
+@inherits ManagePostBase
 
 <AuthorizeView>
     <Authorized Context="auth">
-        <EditForm Model="@this.BlogPostCreateModel" OnValidSubmit="this.Create">
+        <EditForm Model="@this.BlogPostModel" OnValidSubmit="this.Submit">
             <DataAnnotationsValidator/>
             
             @if (this.Preview)
             {
-                <PostView BlogPost="@this.GetBlogPostPreviewModel()" />
+                <PostView BlogPost="@this.GetBlogPostPreviewModel()" ExcludeEdit="@true" />
             }
             else
             {
                 <div class="form-group">
                     <label for="title">Title: </label>
-                    <InputText Id="title" Class="form-control" @bind-Value="@BlogPostCreateModel.Title"/>
-                    <ValidationMessage For="@(() => BlogPostCreateModel.Title)"/>
+                    <InputText Id="title" Class="form-control" @bind-Value="@BlogPostModel.Title"/>
+                    <ValidationMessage For="@(() => BlogPostModel.Title)"/>
                 </div>
 
                 <div class="form-group">
                     <label for="body">Text: </label>
-                    <InputTextArea Id="body" Class="form-control" @bind-Value="@BlogPostCreateModel.Body" rows="10"/>
-                    <ValidationMessage For="@(() => BlogPostCreateModel.Body)"/>
+                    <InputTextArea Id="body" Class="form-control" @bind-Value="@BlogPostModel.Body" rows="10"/>
+                    <ValidationMessage For="@(() => BlogPostModel.Body)"/>
                 </div>
             }
             

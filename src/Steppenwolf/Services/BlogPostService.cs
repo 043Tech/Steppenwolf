@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Steppenwolf.Contracts;
 using Steppenwolf.Services.Data;
@@ -20,9 +21,25 @@ namespace Steppenwolf.Services
             return await this.controller.GetById(id);
         }
 
-        public async Task<Guid> Create(BlogPost blogPost, string authorId)
+        public async Task<Guid> Upsert(BlogPost blogPost, string userId)
         {
-            return await this.controller.Create(blogPost, authorId);
+            return await this.controller.Upsert(blogPost, userId);
+        }
+
+        public async Task<IEnumerable<BlogPost>> GetAll(int pageSize, int pageIndex)
+        {
+            var blogPostRequest = new BlogPostRequest
+            {
+                PageSize = pageSize,
+                PageIndex = pageIndex,
+            };
+                
+            return await this.controller.GetAll(blogPostRequest);
+        }
+
+        public async Task<int> GetAllCount()
+        {
+            return await this.controller.GetAllCount();
         }
     }
 }
