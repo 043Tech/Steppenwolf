@@ -1,3 +1,4 @@
+@using Steppenwolf.Auth
 @inherits PostViewBase
 
 <div class="container mb-3">
@@ -7,7 +8,7 @@
         @if (!this.ExcludeEdit)
         {
             <div class="d-flex align-items-center">
-                <AuthorizeView>
+                <AuthorizeView Roles="@Roles.Blogger">
                     <Authorized>
                         <a class="btn btn-outline-primary btn-sm" href="/admin/post/edit/@this.BlogPost.Id" role="button">Edit</a>
                     </Authorized>
