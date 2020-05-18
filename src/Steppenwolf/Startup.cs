@@ -53,14 +53,16 @@ namespace Steppenwolf
                 })
                 .AddDefaultUI()
                 .AddDefaultTokenProviders()
+                .AddRoles<IdentityRole>()
+                .AddRoleManager<RoleManager<IdentityRole>>()
                 .AddEntityFrameworkStores<PostgresDbContext>();
 
             services.AddServerSideBlazor(); // TODO change to client-side
             services.AddWebOptimizer(pipeline =>
             {
                 pipeline.AddBundle(
-                        "/css/style.css", 
-                        "text/css; charset=UTF-8", 
+                        "/css/style.css",
+                        "text/css; charset=UTF-8",
                         "/wwwroot/scss/style.scss")
                     .UseContentRoot()
                     .CompileScss()
@@ -72,7 +74,7 @@ namespace Steppenwolf
 
             services.AddTransient<BlazorHelper>();
             services.AddTransient<BlogPostService>();
-            
+
             // TODO Move to Api project
             services.AddSingleton<CategoryController>();
             services.AddTransient<BlogPostController>();

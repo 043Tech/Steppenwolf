@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Steppenwolf.Auth;
 using Steppenwolf.Models;
 using Steppenwolf.PostgresRepositories.Context;
 
@@ -15,6 +17,15 @@ namespace Steppenwolf.Extensions
             var context = serviceProvider.GetService<PostgresDbContext>();
 
             var env = serviceProvider.GetService<IHostEnvironment>();
+            var roleManager = context.GetService<RoleManager<IdentityRole>>();
+            if (!roleManager.RoleExistsAsync(Roles.Blogger).Result)
+            {
+                roleManager.CreateAsync(new IdentityRole()
+                {
+                    Name = Roles.Blogger
+                }).Wait();
+            }
+            
             if (env.IsDevelopment())
             {
                 var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
@@ -23,6 +34,10 @@ namespace Steppenwolf.Extensions
                 {
                     var user = new ApplicationUser { UserName = admin, Email = admin };
                     var result = userManager.CreateAsync(user, admin).Result;
+                    if (result.Succeeded)
+                    {
+                        userManager.AddToRoleAsync(user, Roles.Blogger).Wait();
+                    }
 
                     // TODO Clean up
                     for (int i = 0; i < 20; i++)

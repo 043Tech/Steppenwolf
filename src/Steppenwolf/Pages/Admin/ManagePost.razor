@@ -2,10 +2,11 @@
 @page "/admin/post/edit/{id:guid}"
 @* ReSharper disable RedundantUsingDirective *@
 @using Steppenwolf.Pages.Post
+@using Steppenwolf.Auth
 @* ReSharper restore RedundantUsingDirective *@
 @inherits ManagePostBase
 
-<AuthorizeView>
+<AuthorizeView Roles="@Roles.Blogger">
     <Authorized Context="auth">
         <EditForm Model="@this.BlogPostModel" OnValidSubmit="this.Submit">
             <DataAnnotationsValidator/>
