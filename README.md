@@ -1,5 +1,7 @@
 # Steppenwolf
 
+[![Build Status](https://travis-ci.org/043Tech/Steppenwolf.svg?branch=master)](https://travis-ci.org/043Tech/Steppenwolf)
+
 ## Purpose
 Blog with simple design and MPV functionality
 
