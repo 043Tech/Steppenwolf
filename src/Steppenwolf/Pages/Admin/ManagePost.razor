@@ -10,10 +10,10 @@
     <Authorized Context="auth">
         <EditForm Model="@this.BlogPostModel" OnValidSubmit="this.Submit">
             <DataAnnotationsValidator/>
-            
+
             @if (this.Preview)
             {
-                <PostView BlogPost="@this.GetBlogPostPreviewModel()" ExcludeEdit="@true" />
+                <PostView BlogPost="@this.GetBlogPostPreviewModel()" ExcludeEdit="@true"/>
             }
             else
             {
@@ -25,21 +25,23 @@
 
                 <div class="form-group">
                     <label for="body">Text: </label>
-                    <InputTextArea Id="body" Class="form-control" @bind-Value="@BlogPostModel.Body" rows="10"/>
+                    <InputRichText Id="body" Class="form-control" @bind-Value="@BlogPostModel.Body"></InputRichText>
                     <ValidationMessage For="@(() => BlogPostModel.Body)"/>
                 </div>
             }
-            
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <div class="btn btn-secondary" @onclick="() => this.Preview = !this.Preview">
-                @if (this.Preview)
-                {
-                    <span>Edit</span>
-                }
-                else
-                {
-                    <span>Preview</span>
-                }
+
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="btn btn-secondary" @onclick="() => this.Preview = !this.Preview">
+                    @if (this.Preview)
+                    {
+                        <span>Edit</span>
+                    }
+                    else
+                    {
+                        <span>Preview</span>
+                    }
+                </div>
             </div>
         </EditForm>
     </Authorized>

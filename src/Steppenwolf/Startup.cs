@@ -57,7 +57,8 @@ namespace Steppenwolf
                 .AddRoleManager<RoleManager<IdentityRole>>()
                 .AddEntityFrameworkStores<PostgresDbContext>();
 
-            services.AddServerSideBlazor(); // TODO change to client-side
+            services.AddServerSideBlazor() // TODO change to client-side
+                .AddCircuitOptions(options => { options.DetailedErrors = true; }); // TODO only for dev
             services.AddWebOptimizer(pipeline =>
             {
                 pipeline.AddBundle(

@@ -25,4 +25,10 @@
     <ProjectReference Include="..\Steppenwolf.Services\Steppenwolf.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Shared\InputRichText.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+  </ItemGroup>
+
 </Project>
