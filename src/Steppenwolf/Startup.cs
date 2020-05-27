@@ -20,9 +20,12 @@ namespace Steppenwolf
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IHostEnvironment env;
+
+        public Startup(IConfiguration configuration, IHostEnvironment env)
         {
             this.Configuration = configuration;
+            this.env = env;
         }
 
         public IConfiguration Configuration { get; }
@@ -57,7 +60,14 @@ namespace Steppenwolf
                 .AddRoleManager<RoleManager<IdentityRole>>()
                 .AddEntityFrameworkStores<PostgresDbContext>();
 
-            services.AddServerSideBlazor(); // TODO change to client-side
+            services.AddServerSideBlazor() // TODO change to client-side
+                .AddCircuitOptions(options =>
+                {
+                    if (this.env.IsDevelopment())
+                    {
+                        options.DetailedErrors = true;
+                    }
+                });
             services.AddWebOptimizer(pipeline =>
             {
                 pipeline.AddBundle(
