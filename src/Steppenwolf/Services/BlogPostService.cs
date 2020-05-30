@@ -26,12 +26,13 @@ namespace Steppenwolf.Services
             return await this.controller.Upsert(blogPost, userId);
         }
 
-        public async Task<IEnumerable<BlogPost>> GetAll(int pageSize, int pageIndex)
+        public async Task<IEnumerable<BlogPost>> GetAll(int pageSize, int pageIndex, int skip = 0)
         {
             var blogPostRequest = new BlogPostRequest
             {
                 PageSize = pageSize,
                 PageIndex = pageIndex,
+                Skip = skip
             };
                 
             return await this.controller.GetAll(blogPostRequest);

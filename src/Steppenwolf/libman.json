@@ -6,6 +6,16 @@
       "provider": "unpkg",
       "library": "bootstrap@4.4.1",
       "destination": "wwwroot/lib/bootstrap/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "ckeditor5@19.0.1",
+      "destination": "wwwroot/lib/ckeditor/"
+    },
+    {
+      "provider": "unpkg",
+      "library": "jquery@3.5.1",
+      "destination": "wwwroot/lib/jquery/"
     }
   ]
 }

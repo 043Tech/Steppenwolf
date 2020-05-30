@@ -10,6 +10,8 @@ namespace Steppenwolf.Contracts
 
         public string Body { get; set; }
 
+        public string Preview { get; set; }
+
         public Author Author { get; set; }
         
         public DateTime Created { get; set; }

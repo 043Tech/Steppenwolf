@@ -9,6 +9,8 @@ namespace Steppenwolf.Pages.Home
 {
     public class HomePageBase : ComponentBase
     {
+        private readonly int featuredCount = 3;
+        
         protected IEnumerable<BlogPost> BlogPosts { get; set; } = new List<BlogPost>();
 
         protected IEnumerable<BlogPost> Featured { get; set; } = new List<BlogPost>();
@@ -32,18 +34,13 @@ namespace Steppenwolf.Pages.Home
         protected override async void OnInitialized()
         {
             this.Total = await this.BlogPostService.GetAllCount();
-            this.BlogPosts = await this.BlogPostService.GetAll(this.PageSize, this.PageIndex);
-            this.Featured = await this.BlogPostService.GetAll(3, 0);
+            this.Featured = await this.BlogPostService.GetAll(this.featuredCount, 0);
+            this.BlogPosts = await this.BlogPostService.GetAll(this.PageSize, this.PageIndex, skip: this.featuredCount);
         }
 
         protected async Task Load()
         {
-            this.BlogPosts = await this.BlogPostService.GetAll(this.PageSize, this.PageIndex);
-        }
-
-        protected string TakeOf(string str, int size)
-        {
-            return string.Join(" ", str.Split(" ").Take(size)) + "...";
+            this.BlogPosts = await this.BlogPostService.GetAll(this.PageSize, this.PageIndex, skip: this.featuredCount);
         }
 
         protected bool DisablePrev()
@@ -53,7 +50,7 @@ namespace Steppenwolf.Pages.Home
 
         protected bool DisableNext()
         {
-            return (this.PageIndex * this.PageSize) + this.PageSize >= this.Total;
+            return (this.PageIndex * this.PageSize) + this.PageSize + this.featuredCount >= this.Total;
         }
 
         protected async Task Prev()

@@ -33,7 +33,7 @@ namespace Steppenwolf.Services.Data
         public async Task<Guid> Upsert(BlogPost blogPost, string userId)
         {
             var blog = this.mapper.Map<BlogPostEntity>(blogPost);
-            var exist = blog.Id != default && this.repository.Query().Any(b => b.Id == blog.Id);
+            var exist = blog.Id != default && this.repository.Query(true).Any(b => b.Id == blog.Id);
             if (exist)
             {
                 return await this.repository.UpdateAsync(blog);
@@ -49,7 +49,7 @@ namespace Steppenwolf.Services.Data
                 .Include(r => r.Author)
                 .OrderByDescending(b => b.CreatedOn)
                 .ThenBy(b => b.Title)
-                .Skip(blogPostRequest.PageIndex * blogPostRequest.PageSize)
+                .Skip(blogPostRequest.Skip + (blogPostRequest.PageIndex * blogPostRequest.PageSize))
                 .Take(blogPostRequest.PageSize);
             
             return Task.FromResult(this.mapper.Map<IEnumerable<BlogPost>>(blogs));

@@ -5,9 +5,9 @@
 @* ReSharper restore RedundantUsingDirective *@
 
 <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
-    <div class="col-md-6 px-0">
+    <div class="px-0">
         <h1 class="display-4 font-italic">@this.MainBlog.Title</h1>
-        <p class="lead my-3 text-justify">@this.TakeOf(this.MainBlog.Body, 30)</p>
+        <p class="lead my-3 text-justify">@this.MainBlog.Preview</p>
         <p class="lead mb-0">
             <a href="/post/@this.MainBlog.Id" class="text-white font-weight-bold">Continue reading</a>
         </p>
@@ -22,13 +22,8 @@
                     <strong class="d-inline-block mb-2 text-primary">Featured</strong>
                     <h3 class="mb-0">@blog.Title</h3>
                     <div class="mb-1 text-muted">@blog.Created.ToString("MMM dd")</div>
-                    <p class="card-text mb-auto">@this.TakeOf(blog.Body, 15)</p>
+                    <p class="card-text mb-auto">@blog.Preview</p>
                     <a href="/post/@blog.Id" class="stretched-link">Continue reading</a>
-                </div>
-                <div class="col-auto d-none d-lg-block">
-                    <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-                        <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="35%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                    </svg>
                 </div>
             </div>
         </div>

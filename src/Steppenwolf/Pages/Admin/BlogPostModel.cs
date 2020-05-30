@@ -11,5 +11,9 @@ namespace Steppenwolf.Pages.Admin
         [Required]
         [StringLength(20000, MinimumLength = 200)]
         public string Body { get; set; }
+        
+        [Required]
+        [StringLength(300, MinimumLength = 150)]
+        public string Preview { get; set; }
     }
 }
