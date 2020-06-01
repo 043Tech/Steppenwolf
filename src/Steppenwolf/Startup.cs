@@ -14,6 +14,7 @@ using Steppenwolf.PostgresRepositories.Interfaces;
 using Steppenwolf.PostgresRepositories.Repositories;
 using Steppenwolf.Services;
 using Steppenwolf.Services.Data;
+using Steppenwolf.Shared;
 
 namespace Steppenwolf
 {
@@ -83,11 +84,15 @@ namespace Steppenwolf
 
             services.AddTransient<BlazorHelper>();
             services.AddTransient<BlogPostService>();
+            services.AddTransient<CategoryService>();
 
             // TODO Move to Api project
-            services.AddSingleton<CategoryController>();
+            services.AddTransient<CategoryController>();
             services.AddTransient<BlogPostController>();
             services.AddTransient<IRepository<BlogPostEntity>, Repository<BlogPostEntity>>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
+
+            services.AddScoped<HeadState>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

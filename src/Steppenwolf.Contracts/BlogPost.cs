@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Steppenwolf.Contracts
 {
@@ -15,5 +16,7 @@ namespace Steppenwolf.Contracts
         public Author Author { get; set; }
         
         public DateTime Created { get; set; }
+
+        public IEnumerable<Category> Categories { get; set; }
     }
 }

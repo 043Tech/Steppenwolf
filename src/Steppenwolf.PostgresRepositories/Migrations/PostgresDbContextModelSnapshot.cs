@@ -218,6 +218,21 @@ namespace Steppenwolf.PostgresRepositories.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Steppenwolf.Models.BlogCategoryEntity", b =>
+                {
+                    b.Property<Guid>("BlogPostId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("BlogPostId", "CategoryId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("BlogCategories");
+                });
+
             modelBuilder.Entity("Steppenwolf.Models.BlogPostEntity", b =>
                 {
                     b.Property<Guid>("Id")
@@ -250,6 +265,32 @@ namespace Steppenwolf.PostgresRepositories.Migrations
                     b.HasIndex("AuthorId");
 
                     b.ToTable("Blogs");
+                });
+
+            modelBuilder.Entity("Steppenwolf.Models.CategoryEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Slug")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -306,6 +347,21 @@ namespace Steppenwolf.PostgresRepositories.Migrations
                     b.HasOne("Steppenwolf.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Steppenwolf.Models.BlogCategoryEntity", b =>
+                {
+                    b.HasOne("Steppenwolf.Models.BlogPostEntity", "BlogPost")
+                        .WithMany("BlogCategoryEntities")
+                        .HasForeignKey("BlogPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Steppenwolf.Models.CategoryEntity", "Category")
+                        .WithMany("BlogCategories")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

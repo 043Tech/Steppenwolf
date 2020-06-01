@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Steppenwolf.Models
 {
     public class BlogPostEntity : Entity
@@ -11,5 +13,7 @@ namespace Steppenwolf.Models
         public string Body { get; set; }
 
         public string Preview { get; set; }
+        
+        public ICollection<BlogCategoryEntity> BlogCategoryEntities { get; set; }
     }
 }

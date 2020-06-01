@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Steppenwolf.Pages.Admin.Category;
 
 namespace Steppenwolf.Pages.Admin
 {
@@ -15,5 +17,10 @@ namespace Steppenwolf.Pages.Admin
         [Required]
         [StringLength(300, MinimumLength = 150)]
         public string Preview { get; set; }
+
+        [Required]
+        [MinLength(1)]
+        [MaxLength(5)]
+        public IList<CategoryModel> Categories { get; set; } = new List<CategoryModel>();
     }
 }

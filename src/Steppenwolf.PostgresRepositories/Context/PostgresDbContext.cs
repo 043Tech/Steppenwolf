@@ -16,6 +16,10 @@ namespace Steppenwolf.PostgresRepositories.Context
         
         public DbSet<BlogPostEntity> Blogs { get; set; }
 
+        public DbSet<BlogCategoryEntity> BlogCategories { get; set; }
+
+        public DbSet<CategoryEntity> Categories { get; set; }
+
         public override int SaveChanges()
         {
             this.OnBeforeSaving();
@@ -42,6 +46,21 @@ namespace Steppenwolf.PostgresRepositories.Context
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<BlogCategoryEntity>()
+                .HasKey(e => new { e.BlogPostId, e.CategoryId });
+
+            modelBuilder.Entity<BlogCategoryEntity>()
+                .HasOne(e => e.BlogPost)
+                .WithMany(e => e.BlogCategoryEntities)
+                .HasForeignKey(e => e.BlogPostId)
+                .OnDelete(DeleteBehavior.Cascade);
+            
+            modelBuilder.Entity<BlogCategoryEntity>()
+                .HasOne(e => e.Category)
+                .WithMany(e => e.BlogCategories)
+                .HasForeignKey(e => e.CategoryId)
+                .OnDelete(DeleteBehavior.Cascade);
+            
             base.OnModelCreating(modelBuilder);
         }
 

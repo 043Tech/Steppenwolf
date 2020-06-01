@@ -43,6 +43,16 @@ namespace Steppenwolf.Pages.Home
             this.BlogPosts = await this.BlogPostService.GetAll(this.PageSize, this.PageIndex, skip: this.featuredCount);
         }
 
+        protected string TakeOf(string str, int size)
+        {
+            if (str == null)
+            {
+                return string.Empty;
+            }
+            
+            return string.Join(" ", str.Split(" ").Take(size)) + "...";
+        }
+
         protected bool DisablePrev()
         {
             return this.PageIndex == 0;
