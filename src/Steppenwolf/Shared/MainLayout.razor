@@ -20,6 +20,13 @@
                         </NavLink>
                         <AuthorizeView Roles="@Roles.Blogger">
                             <Authorized Context="blogger">
+                                <NavLink class="dropdown-item mb-2" href="admin/category">
+                                    Category management
+                                </NavLink>
+                            </Authorized>
+                        </AuthorizeView>
+                        <AuthorizeView Roles="@Roles.Blogger">
+                            <Authorized Context="blogger">
                                 <NavLink class="dropdown-item mb-2" href="admin/post/create">
                                     New Blog Post
                                 </NavLink>

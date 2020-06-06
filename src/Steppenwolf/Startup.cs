@@ -36,9 +36,11 @@ namespace Steppenwolf
         {
             services.AddAutoMapper(typeof(Startup));
             services.AddRazorPages();
-            services.AddDbContext<PostgresDbContext>(options => options.UseNpgsql(
-                this.Configuration.GetConnectionString("PostgreSQL")
-            ));
+            services.AddDbContext<PostgresDbContext>(
+                options => options.UseNpgsql(
+                    this.Configuration.GetConnectionString("PostgreSQL")
+                ), 
+                ServiceLifetime.Transient);
             var identityConfig = new IdentityProviders();
             this.Configuration.GetSection(nameof(IdentityProviders)).Bind(identityConfig);
             services.AddAuthentication(o =>

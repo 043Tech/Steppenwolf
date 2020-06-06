@@ -68,21 +68,37 @@ namespace Steppenwolf.Services.Data
             return postId;
         }
 
-        public Task<IEnumerable<BlogPost>> GetAll(BlogPostRequest blogPostRequest)
+        public async Task<IEnumerable<BlogPost>> GetAll(BlogPostRequest blogPostRequest)
         {
-            var blogs = this.blogPostRepository.Query()
+            var blogs = await this.blogPostRepository.Query()
                 .Include(r => r.Author)
                 .OrderByDescending(b => b.CreatedOn)
                 .ThenBy(b => b.Title)
                 .Skip(blogPostRequest.Skip + (blogPostRequest.PageIndex * blogPostRequest.PageSize))
-                .Take(blogPostRequest.PageSize);
+                .Take(blogPostRequest.PageSize)
+                .ToListAsync();
             
-            return Task.FromResult(this.mapper.Map<IEnumerable<BlogPost>>(blogs));
+            return this.mapper.Map<IEnumerable<BlogPost>>(blogs);
         }
 
         public async Task<int> GetAllCount()
         {
             return await this.blogPostRepository.Query().CountAsync();
+        }
+
+        public async Task<IEnumerable<BlogPost>> GetForCategoryAsync(Guid categoryId, int pageIndex, int pageSize)
+        {
+            var blogs = await this.blogPostRepository
+                .Query()
+                .Include(r => r.Author)
+                .Where(p => p.BlogCategoryEntities.Any(c => c.CategoryId == categoryId))
+                .OrderByDescending(b => b.CreatedOn)
+                .ThenBy(b => b.Title)
+                .Skip(pageIndex * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+            
+            return this.mapper.Map<IEnumerable<BlogPost>>(blogs);
         }
     }
 }

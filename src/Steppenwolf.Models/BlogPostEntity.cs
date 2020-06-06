@@ -14,6 +14,6 @@ namespace Steppenwolf.Models
 
         public string Preview { get; set; }
         
-        public ICollection<BlogCategoryEntity> BlogCategoryEntities { get; set; }
+        public ICollection<BlogCategoryEntity> BlogCategoryEntities { get; set; } = new List<BlogCategoryEntity>();
     }
 }

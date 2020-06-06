@@ -18,12 +18,12 @@ namespace Steppenwolf.AutoMapper
                 .ForMember(
                     dest => dest.Categories,
                     opt => opt.MapFrom<IEnumerable<Category>>(
-                        src => src.BlogCategoryEntities.Select(c => new Category
+                        src => src.BlogCategoryEntities != null ? src.BlogCategoryEntities.Select(c => new Category
                         {
                             Id = c.CategoryId,
                             Name = c.Category.Name,
                             Slug = c.Category.Slug
-                        })));
+                        }) : new List<Category>()));
             
             this.CreateMap<ApplicationUser, Author>()
                 .ForMember(

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Steppenwolf.Contracts;
+using Steppenwolf.Models;
 using Steppenwolf.Services.Data;
 
 namespace Steppenwolf.Services
@@ -41,6 +42,11 @@ namespace Steppenwolf.Services
         public async Task<int> GetAllCount()
         {
             return await this.controller.GetAllCount();
+        }
+
+        public async Task<IEnumerable<BlogPost>> GetForCategoryAsync(Guid categoryId, int pageIndex, int pageSize)
+        {
+            return await this.controller.GetForCategoryAsync(categoryId, pageIndex, pageSize);
         }
     }
 }

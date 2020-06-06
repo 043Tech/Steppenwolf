@@ -95,7 +95,7 @@ namespace Steppenwolf.Services.Data
                 .Query(false)
                 .Include(c => c.BlogCategories)
                 .ThenInclude(c => c.BlogPost)
-                .FirstOrDefaultAsync(c => c.Slug == slug.Trim().ToLower());
+                .FirstOrDefaultAsync(c => c.Slug == slug.ToLower().Trim().ToLower());
  
             return this.mapper.Map<Category>(categoryEntity);
         }
