@@ -36,11 +36,23 @@ namespace Steppenwolf.Pages.Home
             this.Total = await this.BlogPostService.GetAllCount();
             this.Featured = await this.BlogPostService.GetAll(this.featuredCount, 0);
             this.BlogPosts = await this.BlogPostService.GetAll(this.PageSize, this.PageIndex, skip: this.featuredCount);
+            this.StateHasChanged();
         }
 
         protected async Task Load()
         {
             this.BlogPosts = await this.BlogPostService.GetAll(this.PageSize, this.PageIndex, skip: this.featuredCount);
+            this.StateHasChanged();
+        }
+
+        protected string TakeOf(string str, int size)
+        {
+            if (str == null)
+            {
+                return string.Empty;
+            }
+            
+            return string.Join(" ", str.Split(" ").Take(size)) + "...";
         }
 
         protected bool DisablePrev()

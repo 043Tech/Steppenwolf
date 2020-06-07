@@ -4,7 +4,7 @@
 <div class="container mb-3">
     <h1>@this.BlogPost.Title</h1>
     <div class="d-flex justify-content-between">
-        <Author DateCreated="@this.BlogPost.Created" AuthorName="@this.BlogPost.Author.Name" class="flex-grow-1"/>
+        <Author DateCreated="@this.BlogPost.Created" AuthorName="@this.BlogPost.Author.Name" class="flex-grow-1" />
         @if (!this.ExcludeEdit)
         {
             <div class="d-flex align-items-center">

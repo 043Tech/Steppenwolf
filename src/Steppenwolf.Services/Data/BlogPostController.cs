@@ -12,19 +12,26 @@ namespace Steppenwolf.Services.Data
 {
     public class BlogPostController
     {
-        private readonly IRepository<BlogPostEntity> repository;
+        private readonly IRepository<BlogPostEntity> blogPostRepository;
+        private readonly ICategoryRepository categoryRepository;
         private readonly IMapper mapper;
 
-        public BlogPostController(IRepository<BlogPostEntity> repository, IMapper mapper)
+        public BlogPostController(
+            IRepository<BlogPostEntity> blogPostRepository, 
+            ICategoryRepository categoryRepository,
+            IMapper mapper)
         {
-            this.repository = repository;
+            this.blogPostRepository = blogPostRepository;
+            this.categoryRepository = categoryRepository;
             this.mapper = mapper;
         }
 
         public Task<BlogPost> GetById(Guid id)
         {
-            var blog = this.repository.Query()
+            var blog = this.blogPostRepository.Query()
                 .Include(r => r.Author)
+                .Include(r => r.BlogCategoryEntities)
+                .ThenInclude(r => r.Category)
                 .FirstOrDefault(b => b.Id == id);
             return Task.FromResult(this.mapper.Map<BlogPost>(blog));
         }
@@ -32,32 +39,66 @@ namespace Steppenwolf.Services.Data
         // Todo take user id from bearer when migrated to web assembly
         public async Task<Guid> Upsert(BlogPost blogPost, string userId)
         {
+            Guid postId;
+            
             var blog = this.mapper.Map<BlogPostEntity>(blogPost);
-            var exist = blog.Id != default && this.repository.Query(true).Any(b => b.Id == blog.Id);
-            if (exist)
+            var existingPost = blog.Id != default 
+                ? await this.blogPostRepository
+                    .Query(false)
+                    .Include(b => b.BlogCategoryEntities)
+                    .ThenInclude(b => b.Category)
+                    .FirstOrDefaultAsync(b => b.Id == blog.Id)
+                : null;
+            if (existingPost != null)
             {
-                return await this.repository.UpdateAsync(blog);
+                postId = await this.blogPostRepository.UpdateAsync(blog);
+                await this.categoryRepository.UpdateCategoriesAsync(
+                    existingPost,
+                    this.mapper.Map<IEnumerable<CategoryEntity>>(blogPost.Categories));
+            }
+            else
+            {
+                blog.AuthorId = userId;
+                postId = await this.blogPostRepository.AddAsync(blog);
+                await this.categoryRepository.UpdateCategoriesAsync(
+                    blog,
+                    this.mapper.Map<IEnumerable<CategoryEntity>>(blogPost.Categories));
             }
             
-            blog.AuthorId = userId;
-            return await this.repository.AddAsync(blog);
+            return postId;
         }
 
-        public Task<IEnumerable<BlogPost>> GetAll(BlogPostRequest blogPostRequest)
+        public async Task<IEnumerable<BlogPost>> GetAll(BlogPostRequest blogPostRequest)
         {
-            var blogs = this.repository.Query()
+            var blogs = await this.blogPostRepository.Query()
                 .Include(r => r.Author)
                 .OrderByDescending(b => b.CreatedOn)
                 .ThenBy(b => b.Title)
                 .Skip(blogPostRequest.Skip + (blogPostRequest.PageIndex * blogPostRequest.PageSize))
-                .Take(blogPostRequest.PageSize);
+                .Take(blogPostRequest.PageSize)
+                .ToListAsync();
             
-            return Task.FromResult(this.mapper.Map<IEnumerable<BlogPost>>(blogs));
+            return this.mapper.Map<IEnumerable<BlogPost>>(blogs);
         }
 
-        public Task<int> GetAllCount()
+        public async Task<int> GetAllCount()
         {
-            return Task.FromResult(this.repository.Query().Count());
+            return await this.blogPostRepository.Query().CountAsync();
+        }
+
+        public async Task<IEnumerable<BlogPost>> GetForCategoryAsync(Guid categoryId, int pageIndex, int pageSize)
+        {
+            var blogs = await this.blogPostRepository
+                .Query()
+                .Include(r => r.Author)
+                .Where(p => p.BlogCategoryEntities.Any(c => c.CategoryId == categoryId))
+                .OrderByDescending(b => b.CreatedOn)
+                .ThenBy(b => b.Title)
+                .Skip(pageIndex * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+            
+            return this.mapper.Map<IEnumerable<BlogPost>>(blogs);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿@using Steppenwolf.Services.Data
-@using Steppenwolf.Services.Models
+@using Steppenwolf.Contracts
+@using Steppenwolf.Services
 @inject CategoryController CategoryController
 <nav class="nav-scroller py-1 mb-2">
     <ul class="nav d-flex justify-content-between">
@@ -21,13 +22,14 @@
 
 @code {
 
-    private IEnumerable<Category> categories;
+    private IEnumerable<Category> categories = new List<Category>();
+
+    [Inject]
+    private CategoryService CategoryService { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        this.categories = CategoryController.GetCategories();
-
-        await Task.CompletedTask;
+        this.categories = await this.CategoryService.GetHeaderCategoriesAsync(5);
     }
 
 }

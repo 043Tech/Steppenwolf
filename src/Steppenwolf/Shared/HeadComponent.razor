@@ -1,0 +1,18 @@
+﻿@inject HeadState head
+
+@foreach (var item in head.HeadItems)
+{
+    @((MarkupString)item)
+}
+<title>Steppenwolf@(string.IsNullOrEmpty(head.Title) ? string.Empty : $"- {head.Title}")</title>
+
+@code
+{
+    protected override void OnInitialized()
+    {
+        head.HeadChanged += () =>
+        {
+            StateHasChanged();
+        };
+    }
+}

@@ -3,13 +3,14 @@
 @* ReSharper disable RedundantUsingDirective *@
 @using Steppenwolf.Pages.Post
 @using Steppenwolf.Auth
+@using LoreSoft.Blazor.Controls
 @* ReSharper restore RedundantUsingDirective *@
 @inherits ManagePostBase
 
 <AuthorizeView Roles="@Roles.Blogger">
     <Authorized Context="auth">
         <EditForm Model="@this.BlogPostModel" OnValidSubmit="this.Submit">
-            <DataAnnotationsValidator/>
+            <DataAnnotationsValidator />
 
             @if (this.Preview)
             {
@@ -19,8 +20,8 @@
             {
                 <div class="form-group">
                     <label for="title">Title: </label>
-                    <InputText Id="title" Class="form-control" @bind-Value="@BlogPostModel.Title"/>
-                    <ValidationMessage For="@(() => BlogPostModel.Title)"/>
+                    <InputText Id="title" Class="form-control" @bind-Value="@BlogPostModel.Title" />
+                    <ValidationMessage For="@(() => BlogPostModel.Title)" />
                 </div>
                 
                 <div class="form-group">
@@ -33,6 +34,22 @@
                     <label for="body">Text: </label>
                     <InputRichText Id="body" Class="form-control" @bind-Value="@BlogPostModel.Body"></InputRichText>
                     <ValidationMessage For="@(() => BlogPostModel.Body)"/>
+                </div>
+                
+                <div class="form-group">
+                    <label for="body">Categories: </label>
+                    <Typeahead SearchMethod="@SearchCategories"
+                               @bind-Values="@BlogPostModel.Categories"
+                               Placeholder="Owners"
+                               MinimumLength="3">
+                        <SelectedTemplate Context="category">
+                            @category.Name
+                        </SelectedTemplate>
+                        <ResultTemplate Context="category">
+                            @category.Name
+                        </ResultTemplate>
+                    </Typeahead>
+                    <ValidationMessage For="@(() => BlogPostModel.Categories)" />
                 </div>
             }
 
@@ -52,6 +69,6 @@
         </EditForm>
     </Authorized>
     <NotAuthorized>
-        <RedirectTo Uri="/"/>
+        <RedirectTo Uri="/" />
     </NotAuthorized>
 </AuthorizeView>

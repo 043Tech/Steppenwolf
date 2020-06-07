@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Steppenwolf.PostgresRepositories.Context;
@@ -9,9 +10,10 @@ using Steppenwolf.PostgresRepositories.Context;
 namespace Steppenwolf.PostgresRepositories.Migrations
 {
     [DbContext(typeof(PostgresDbContext))]
-    partial class PostgresDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200520182319_AddCategories")]
+    partial class AddCategories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -251,9 +253,6 @@ namespace Steppenwolf.PostgresRepositories.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("Preview")
-                        .HasColumnType("text");
-
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
@@ -280,9 +279,6 @@ namespace Steppenwolf.PostgresRepositories.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Slug")
                         .HasColumnType("text");
 
                     b.Property<DateTime>("UpdatedOn")

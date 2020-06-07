@@ -1,0 +1,54 @@
+@page "/admin/category"
+@* ReSharper disable RedundantUsingDirective *@
+@using Steppenwolf.Pages.Post
+@using Steppenwolf.Auth
+@* ReSharper restore RedundantUsingDirective *@
+@inherits ManageCategoryBase
+
+<AuthorizeView Roles="@Roles.Blogger">
+    <Authorized Context="auth">
+        <EditForm Model="@this.Categories" OnValidSubmit="this.Submit">
+            <DataAnnotationsValidator />
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Slug</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                    <th scope="row"></th>
+                    <td>
+                        <InputText Id="title" Class="form-control" @bind-Value="@this.CategoryModel.Name" />
+                        <ValidationMessage For="@(() => CategoryModel.Name)" />
+                    </td>
+                    <td>
+                        <InputText Id="title" Class="form-control" @bind-Value="@this.CategoryModel.Slug" />
+                        <ValidationMessage For="@(() => CategoryModel.Slug)" /></td>
+                    <td>
+                        <button>@(this.CategoryModel.Id == Guid.Empty ? "Create" : "Update")</button>
+                    </td>
+                </tr>
+                @foreach (var category in Categories)
+                {
+                    <tr>
+                        <th scope="row">@category.Id</th>
+                        <td>@category.Name</td>
+                        <td>@category.Slug</td>
+                        <td>
+                            <a href="#" @onclick="@(async () => await SelectForUpdate(category.Id))" @onclick:preventDefault>Edit</a>
+                            <a href="#" @onclick="@(async () => await Delete(category.Id))" @onclick:preventDefault>Delete</a>
+                        </td>
+                    </tr>
+                }
+              </tbody>
+            </table>
+        </EditForm>
+    </Authorized>
+    <NotAuthorized>
+        <RedirectTo Uri="/" />
+    </NotAuthorized>
+</AuthorizeView>
