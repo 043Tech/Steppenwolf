@@ -81,7 +81,7 @@ namespace Steppenwolf.Services.Data
             var categories = await this.categoryRepository
                 .Query(false)
                 .Include(c => c.BlogCategories)
-                .OrderBy(c => c.BlogCategories.Count)
+                .OrderByDescending(c => c.BlogCategories.Count)
                 .ThenByDescending(c => c.CreatedOn)
                 .Take(size)
                 .ToListAsync();
